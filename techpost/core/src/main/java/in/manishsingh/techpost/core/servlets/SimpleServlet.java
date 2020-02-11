@@ -16,6 +16,9 @@
 package in.manishsingh.techpost.core.servlets;
 
 import com.day.cq.commons.jcr.JcrConstants;
+
+import in.manishsingh.techpost.core.pojo.BundleContextDemo;
+
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
@@ -39,7 +42,8 @@ import java.io.IOException;
            property={
                    "sling.servlet.methods=" + HttpConstants.METHOD_GET,
                    "sling.servlet.resourceTypes="+ "techpost/components/structure/page",
-                   "sling.servlet.extensions=" + "txt"
+                   "sling.servlet.extensions=" + "txt",
+                   "sling.servlet.paths="+ "/bin/ms"
            })
 @ServiceDescription("Simple Demo Servlet")
 public class SimpleServlet extends SlingSafeMethodsServlet {
@@ -50,6 +54,15 @@ public class SimpleServlet extends SlingSafeMethodsServlet {
     protected void doGet(final SlingHttpServletRequest req,
             final SlingHttpServletResponse resp) throws ServletException, IOException {
         final Resource resource = req.getResource();
+        
+        BundleContextDemo bc1=new BundleContextDemo();
+        try {
+			bc1.activate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         resp.setContentType("text/plain");
         resp.getWriter().write("Title = " + resource.getValueMap().get(JcrConstants.JCR_TITLE));
     }
