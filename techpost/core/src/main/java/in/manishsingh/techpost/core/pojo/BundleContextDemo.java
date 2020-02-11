@@ -13,14 +13,13 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 
-import com.adobe.cq.sightly.WCMUsePojo;
 
-public class BundleContextDemo extends WCMUsePojo {
+public class BundleContextDemo{
 	
 	Map<String, Object> auth_info= Collections.singletonMap(ResourceResolverFactory.SUBSERVICE, "demo-service");
 	ResourceResolver resourceResolver;
-	@Override
-	public void activate() throws Exception {
+	
+	public void updateNode() {
 		BundleContext bundleContext=FrameworkUtil.getBundle(BundleContextDemo.class).getBundleContext();
 		ServiceReference serviceRef= bundleContext.getServiceReference(ResourceResolverFactory.class.getName());
 		ResourceResolverFactory resourceResolverFactory=(ResourceResolverFactory) bundleContext.getService(serviceRef);

@@ -57,7 +57,7 @@ public class SimpleServlet extends SlingSafeMethodsServlet {
         
         BundleContextDemo bc1=new BundleContextDemo();
         try {
-			bc1.activate();
+			bc1.updateNode();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
