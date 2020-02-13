@@ -16,6 +16,11 @@
 package in.manishsingh.techpost.core.filters;
 
 import java.io.IOException;
+
+import javax.jcr.Node;
+import javax.jcr.Property;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -24,6 +29,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.engine.EngineConstants;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.propertytypes.ServiceDescription;
@@ -54,7 +62,59 @@ public class LoggingFilter implements Filter {
         logger.debug("request for {}, with selector {}", slingRequest
                 .getRequestPathInfo().getResourcePath(), slingRequest
                 .getRequestPathInfo().getSelectorString());
-
+        
+//        SlingHttpServletResponse sr = (SlingHttpServletResponse) response;
+//        ResourceResolver rr = slingRequest.getResourceResolver();
+//       
+//        logger.info("MS: Location->"+rr.resolve(slingRequest.getRequestURI().trim()));
+//        
+//       Resource r1= rr.resolve(slingRequest.getRequestURI().trim());
+//       logger.info("MS: Location1->"+r1.getValueMap()+"String->"+r1.getResourceType()+"String2->"+r1.getResourceMetadata());
+//        if(r1.getResourceType().equalsIgnoreCase("sling:redirect")) {
+//        	sr.setStatus(302);
+//        	sr.setHeader("Location", r1.getValueMap().get("sling:target").toString().replaceFirst(".html", ""));
+//        	logger.info("Inside if");
+//        	
+//        	logger.info("Redirect->"+r1.getValueMap().get("sling:target"));
+//        	//sr.send
+//        	//r1.getValueMap().get("sling:target").toString().replaceFirst(".html", "");
+//        	//sr.sendRedirect(r1.getValueMap().get("sling:target").toString().replaceFirst(".html", ""));
+//        	return;
+//        }else {
+//        	filterChain.doFilter(request, response);
+//        }
+//        
+//     // Resource resource = slingRequest.getResourceResolver().resolve(slingRequest.getRequestURI());
+////      
+////      ResourceResolver rr = slingRequest.getResourceResolver();
+//    logger.info("MS-Full path->"+rr.getResource(slingRequest.getRequestURI()));
+////      logger.info("MS-Map"+rr.map(slingRequest.getRequestURI()));
+////      
+////      Session session=rr.adaptTo(Session.class);
+////
+////      
+////      
+////     try {
+////		Node node = session.getNode(resource.getPath());
+////		if(node.hasNode("/jcr:content")) {
+////			logger.info("has jcr:content");
+////			Node n1=node.getNode("/jcr:content");
+////			Property p1=n1.getProperty("sling:vanityPath");
+////			
+////			if(p1!=null) {
+////				logger.info("VanityFound");
+////			}else {
+////				logger.info("VanityNotFound");
+////			}
+////		}
+////	} catch (RepositoryException e) {
+////		// TODO Auto-generated catch block
+////		e.printStackTrace();
+////	}
+////     
+//
+//       // filterChain.doFilter(request, response);
+        
         filterChain.doFilter(request, response);
     }
 
